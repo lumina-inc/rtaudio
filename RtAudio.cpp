@@ -1088,18 +1088,20 @@ static OSStatus streamDisconnectListener( AudioObjectID /*id*/,
       CallbackInfo *info = (CallbackInfo *) infoPointer;
       RtApiCore *object = (RtApiCore *) info->object;
       info->deviceDisconnected = true;
+      if(object == NULL)
+        return kAudioHardwareUnspecifiedError;
       object->closeStream();
       return kAudioHardwareUnspecifiedError;
     }
   }
-  
+
   return kAudioHardwareNoError;
 }
 
 void RtApiCore :: probeDevices( void )
 {
   // See list of required functionality in RtApi::probeDevices().
-  
+
   // Find out how many audio devices there are.
   UInt32 dataSize;
   AudioObjectPropertyAddress property = { kAudioHardwarePropertyDevices, kAudioObjectPropertyScopeGlobal, KAUDIOOBJECTPROPERTYELEMENT };
