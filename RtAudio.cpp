@@ -1088,9 +1088,6 @@ static OSStatus streamDisconnectListener( AudioObjectID /*id*/,
       CallbackInfo *info = (CallbackInfo *) infoPointer;
       RtApiCore *object = (RtApiCore *) info->object;
       info->deviceDisconnected = true;
-      if(object == NULL)
-        return kAudioHardwareUnspecifiedError;
-      object->closeStream();
       return kAudioHardwareUnspecifiedError;
     }
   }
