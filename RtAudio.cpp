@@ -1078,6 +1078,7 @@ unsigned int RtApiCore :: getDefaultInputDevice( void )
 }
 
 // If a device used in an open stream is disconnected, close the stream.
+// Lumina: removed stream closing & deviceDisconnected value update as workaround to prevent crash
 static OSStatus streamDisconnectListener( AudioObjectID /*id*/,
                                           UInt32 nAddresses,
                                           const AudioObjectPropertyAddress properties[],
@@ -1085,9 +1086,6 @@ static OSStatus streamDisconnectListener( AudioObjectID /*id*/,
 {
   for ( UInt32 i=0; i<nAddresses; i++ ) {
     if ( properties[i].mSelector == kAudioDevicePropertyDeviceIsAlive ) {
-      CallbackInfo *info = (CallbackInfo *) infoPointer;
-      RtApiCore *object = (RtApiCore *) info->object;
-      info->deviceDisconnected = true;
       return kAudioHardwareUnspecifiedError;
     }
   }
