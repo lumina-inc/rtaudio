@@ -1408,11 +1408,11 @@ static OSStatus callbackHandler( AudioDeviceID inDevice,
   if(info == NULL || info->object == NULL || inPutData == NULL || outOutputData == NULL)
     return kAudioHardwareUnspecifiedError;
 
-  RtApi *object = (RtApi *) info->object;
-  RtApiCore *core = dynamic_cast<RtApiCore *>(object);
-  if ( core == NULL )
+  RtApiCore *object = dynamic_cast<RtApiCore*>((RtApi*)info->object);
+  if(object == NULL)
     return kAudioHardwareUnspecifiedError;
-  if ( core->callbackEvent( inDevice, inInputData, outOutputData ) == false )
+
+  if ( object->callbackEvent( inDevice, inInputData, outOutputData ) == false )
     return kAudioHardwareUnspecifiedError;
   else
     return kAudioHardwareNoError;
