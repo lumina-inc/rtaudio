@@ -1405,11 +1405,14 @@ static OSStatus callbackHandler( AudioDeviceID inDevice,
                                  void* infoPointer )
 {
   CallbackInfo *info = (CallbackInfo *) infoPointer;
-  if(info == NULL || info->object == NULL)
+  if(info == NULL || info->object == NULL || inPutData == NULL || outOutputData == NULL)
     return kAudioHardwareUnspecifiedError;
 
-  RtApiCore *object = (RtApiCore *) info->object;
-  if ( object->callbackEvent( inDevice, inInputData, outOutputData ) == false )
+  RtApi *object = (RtApi *) info->object;
+  RtApiCore *core = dynamic_cast<RtApiCore *>(object);
+  if ( core == NULL )
+    return kAudioHardwareUnspecifiedError;
+  if ( core->callbackEvent( inDevice, inInputData, outOutputData ) == false )
     return kAudioHardwareUnspecifiedError;
   else
     return kAudioHardwareNoError;
