@@ -278,13 +278,11 @@ target_compile_definitions(rtaudio PRIVATE ${API_DEFS})
 target_compile_definitions(rtaudio PRIVATE RTAUDIO_EXPORT)
 target_link_libraries(rtaudio ${LINKLIBS})
 
-# Subdirs
-include(CTest)
-
 if (NOT DEFINED RTAUDIO_BUILD_TESTING OR RTAUDIO_BUILD_TESTING STREQUAL "")
   set(RTAUDIO_BUILD_TESTING ${BUILD_TESTING})
 endif()
 if (RTAUDIO_BUILD_TESTING)
+  include(CTest)
   add_subdirectory(tests)
 endif()
 
