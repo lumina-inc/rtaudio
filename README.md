@@ -4,7 +4,7 @@
 
 A set of C++ classes that provide a common API for realtime audio input/output across Linux (native ALSA, JACK, PulseAudio and OSS), Macintosh OS X (CoreAudio and JACK), and Windows (DirectSound, ASIO and WASAPI) operating systems.
 
-By Gary P. Scavone, 2001-2022 (and many other developers!)
+By Gary P. Scavone, 2001-2023 (and many other developers!)
 
 This distribution of RtAudio contains the following:
 
@@ -35,6 +35,7 @@ Several build systems are available.  These are:
   - autotools (`./autogen.sh; make` from git, or `./configure; make` from tarball release)
   - CMake (`mkdir build; cd build; ../cmake; make`)
   - meson (`meson build; cd build; ninja`)
+  - vcpkg (`./bootstrap-vcpkg.sh; ./vcpkg integrate install; ./vcpkg install rtaudio`)
 
 See `install.txt` for more instructions about how to select the audio backend API.  By
 default all detected APIs will be enabled.
